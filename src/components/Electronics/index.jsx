@@ -12,19 +12,24 @@ const Electronics = (props) => {
   const { limit } = props;
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user.id);
   const cartList = useSelector((state) => state.cart.list);
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
       try {
         const { data } = await instance.get(
           `products/category/electronics?${limit ? `limit=${limit}` : ""}`
         );
         setList(data);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
+        setIsLoading(false);
       }
     };
     loadData();
@@ -59,7 +64,7 @@ const Electronics = (props) => {
     dispatch(updateWishlist(item));
   };
 
-  if (error) return null;
+  if (error || isLoading) return null;
   return (
     <div className="container mt-10">
       <h3 className="text-2xl">Electronics</h3>

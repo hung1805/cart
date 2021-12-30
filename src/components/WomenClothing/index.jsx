@@ -14,6 +14,7 @@ const WomenClothing = (props) => {
 
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -22,13 +23,16 @@ const WomenClothing = (props) => {
 
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
       try {
         const { data } = await instance.get(
           `products/category/women's%20clothing?${limit ? `limit=${limit}` : ""}`
         );
         setList(data);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
+        setIsLoading(false);
       }
     };
     loadData();
@@ -62,7 +66,7 @@ const WomenClothing = (props) => {
   const handleAddToWishlist = (item) => {
     dispatch(updateWishlist(item));
   };
-  if (error) {
+  if (isLoading || error) {
     return null;
   }
   return (

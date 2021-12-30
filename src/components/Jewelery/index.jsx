@@ -12,19 +12,24 @@ const Jewelery = (props) => {
   const { limit } = props;
   const [list, setList] = useState([]);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const cartList = useSelector((state) => state.cart.list);
   const userId = useSelector((state) => state.auth.user.id);
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
       try {
         const { data } = await instance.get(
           `products/category/jewelery?${limit ? `limit=${limit}` : ""}`
         );
         setList(data);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
+        setIsLoading(false);
       }
     };
     loadData();
@@ -57,7 +62,7 @@ const Jewelery = (props) => {
   const handleAddToWishlist = (item) => {
     dispatch(updateWishlist(item));
   };
-  if (error) return null;
+  if (error || isLoading) return null;
   return (
     <div className="container mt-10">
       <h3 className="text-2xl">Jewelery</h3>

@@ -15,19 +15,23 @@ const MenClothing = (props) => {
   const [list, setList] = useState([]);
   const cartList = useSelector((state) => state.cart.list);
   const [error, setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const userId = useSelector((state) => state.auth.user.id);
 
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
       try {
         const { data } = await instance.get(
           `products/category/men's%20clothing?${limit ? `limit=${limit}` : ""}`
         );
         setList(data);
+        setIsLoading(false);
       } catch (error) {
         setError(error);
+        setIsLoading(false);
       }
     };
     loadData();
@@ -61,7 +65,7 @@ const MenClothing = (props) => {
   const handleAddToWishlist = (item) => {
     dispatch(updateWishlist(item));
   };
-  if (error) return null;
+  if (isLoading || error) return null;
   return (
     <div className="container mt-10">
       <h3 className="text-2xl">Men's Clothing</h3>
