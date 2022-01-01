@@ -5,7 +5,8 @@ API: https://fakestoreapi.com/<br />
 Get Firebase Config here: https://firebase.google.com/<br />
 Permission:<br />
 ⭐Guest: + See product details + Add product to wishlist<br />
-⭐User: + Sign up, sign in with email and password or sign in with Google, Facebook Account + See user profile, change password and display name, see cart data, add or remove product from cart, check out<br />
+⭐User: + Sign up, sign in with email and password or sign in with Google, Facebook Account<br />
+         + See user profile, change password and display name, see cart data, add or remove product from cart, check out<br />
 ⭐Admin: Doing...Coming soon.<br />
 
 Technologies which I used:<br />
