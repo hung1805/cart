@@ -37,8 +37,8 @@ const ProductDetail = (props) => {
 
   useEffect(() => {
     const loadData = async () => {
+      setIsLoading(true);
       try {
-        setIsLoading(true);
         const { data } = await instance.get(`/products/${id}`);
         setProduct(data);
         setIsLoading(false);
