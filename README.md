@@ -17,5 +17,5 @@ Technologies which I used:<br />
 📝 Tailwind Css(v2) for styling and responsive(Doing responsive, good UI on destop and laptop screen)
 📝 React router v6 for routing page<br />
 📝 Formik and Yup for form and validate form<br />
-📝 Axios for calling API and get data<br />
+📝 Axios for calling API and getting data<br />
 📝 Swiper Slider for slides<br />
